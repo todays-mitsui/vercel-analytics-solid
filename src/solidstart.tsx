@@ -1,6 +1,6 @@
 import { Analytics as AnalyticsScript } from './solid';
 import { useLocation, useParams } from '@solidjs/router';
-import { computeRoute } from '@vercel/analytics';
+import { computeRoute, track } from '@vercel/analytics';
 import type { AnalyticsProps, BeforeSend, BeforeSendEvent } from '@vercel/analytics';
 
 type Props = Omit<AnalyticsProps, 'route' | 'disableAutoTrack'>;
@@ -34,4 +34,5 @@ export const useRoute = (): {
   };
 };
 
+export { track };
 export type { AnalyticsProps, BeforeSend, BeforeSendEvent };

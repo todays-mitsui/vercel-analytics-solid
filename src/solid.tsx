@@ -1,5 +1,5 @@
 import { createEffect, onMount } from 'solid-js';
-import { inject, pageview } from '@vercel/analytics';
+import { inject, pageview, track } from '@vercel/analytics';
 import type { AnalyticsProps, BeforeSend, BeforeSendEvent } from '@vercel/analytics';
 
 export function Analytics(
@@ -32,4 +32,5 @@ export function Analytics(
   return null;
 }
 
+export { track };
 export type { AnalyticsProps, BeforeSend, BeforeSendEvent };
