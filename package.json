@@ -1,50 +1,56 @@
 {
   "name": "vercel-analytics-solid",
-  "version": "0.1.1",
   "description": "A lightweight SolidStart component that seamlessly integrates Vercel Analytics into your SolidJS applications.",
-  "type": "module",
-  "module": "./src/solid.tsx",
-  "exports": {
-    ".": "./src/solid.tsx",
-    "./solidstart": "./src/solidstart.tsx"
-  },
-  "scripts": {
-    "fmt": "npx @biomejs/biome format --write ./src",
-    "check": "npx @biomejs/biome check --write ./src",
-    "test": "vitest run",
-    "test:watch": "vitest watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/todays-mitsui/vercel-analytics-solid.git"
-  },
-  "keywords": [
-    "solidjs",
-    "solidstart",
-    "vercel",
-    "analytics",
-    "component",
-    "web-analytics"
-  ],
+  "version": "0.1.1",
   "author": "Mitsui <todays.mitsui@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/todays-mitsui/vercel-analytics-solid/issues"
   },
-  "homepage": "https://github.com/todays-mitsui/vercel-analytics-solid#readme",
   "dependencies": {
     "@vercel/analytics": "^1.4.1",
     "vite-plugin-solid": "^2.11.1"
-  },
-  "peerDependencies": {
-    "@solidjs/router": "^0.15.1",
-    "solid-js": "^1.9.3"
   },
   "devDependencies": {
     "@solidjs/testing-library": "^0.8.10",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/user-event": "^14.6.1",
     "jsdom": "^26.0.0",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3",
     "vitest": "^3.0.5"
-  }
+  },
+  "exports": {
+    ".": "./src/solid.tsx",
+    "./solidstart": "./src/solidstart.tsx"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/todays-mitsui/vercel-analytics-solid#readme",
+  "keywords": [
+    "analytics",
+    "component",
+    "solidjs",
+    "solidstart",
+    "vercel",
+    "web-analytics"
+  ],
+  "license": "MIT",
+  "module": "./src/solid.tsx",
+  "peerDependencies": {
+    "@solidjs/router": "^0.15.1",
+    "solid-js": "^1.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/todays-mitsui/vercel-analytics-solid.git"
+  },
+  "scripts": {
+    "build": "tsup src/solid.tsx src/solidstart.tsx",
+    "check": "npx @biomejs/biome check --write ./src",
+    "fmt": "npx @biomejs/biome format --write ./src",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
+  },
+  "type": "module"
 }
