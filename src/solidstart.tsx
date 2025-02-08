@@ -5,11 +5,12 @@ import type {
 	BeforeSend,
 	BeforeSendEvent,
 } from "@vercel/analytics";
+import type { JSX } from "solid-js";
 import { Analytics as AnalyticsScript } from "./solid";
 
 type Props = Omit<AnalyticsProps, "route" | "disableAutoTrack">;
 
-export function Analytics(props: Props) {
+export function Analytics(props: Props): JSX.Element {
 	const { route, path } = useRoute();
 	return (
 		<AnalyticsScript
