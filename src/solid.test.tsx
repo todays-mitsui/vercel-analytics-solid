@@ -1,7 +1,7 @@
 import { cleanup, render } from "@solidjs/testing-library";
 import { createSignal } from "solid-js";
 import { afterEach, beforeEach, describe, expect, test } from "vitest";
-import { Analytics, type AnalyticsProps } from "./solid";
+import { Analytics, type AnalyticsProps, track } from "./solid";
 
 describe("<Analytics />", () => {
 	afterEach(() => {
@@ -84,4 +84,42 @@ describe("<Analytics />", () => {
 			});
 		},
 	);
+
+	describe("track custom events", () => {
+		describe("queue custom events", () => {
+			test("tracks event with name only", () => {
+				render(() => <Analytics mode="production" />);
+				track("my event");
+
+				expect(window.vaq?.[0]).toEqual([
+					"event",
+					{
+						name: "my event",
+					},
+				]);
+			});
+
+			test("allows custom data to be tracked", () => {
+				render(() => <Analytics mode="production" />);
+				const name = "custom event";
+				const data = { string: "string", number: 1 };
+				track(name, data);
+
+				expect(window.vaq?.[0]).toEqual(["event", { name, data }]);
+			});
+
+			test("strips data for nested objects", () => {
+				render(() => <Analytics mode="production" />);
+				const name = "custom event";
+				const data = { string: "string", number: 1 };
+				type Params = Parameters<typeof track>;
+				track(name, {
+					...data,
+					nested: { object: "" } as unknown as Params[1][string],
+				});
+
+				expect(window.vaq?.[0]).toEqual(["event", { name, data }]);
+			});
+		});
+	});
 });
