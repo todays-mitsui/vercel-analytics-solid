@@ -11,7 +11,8 @@
   "scripts": {
     "fmt": "npx @biomejs/biome format --write ./src",
     "check": "npx @biomejs/biome check --write ./src",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:watch": "vitest watch"
   },
   "repository": {
     "type": "git",
