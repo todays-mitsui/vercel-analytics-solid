@@ -2,13 +2,16 @@
   "name": "vercel-analytics-solid",
   "version": "0.1.1",
   "description": "A lightweight SolidStart component that seamlessly integrates Vercel Analytics into your SolidJS applications.",
+  "type": "module",
   "module": "./src/solid.tsx",
   "exports": {
     ".": "./src/solid.tsx",
     "./solidstart": "./src/solidstart.tsx"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "fmt": "npx @biomejs/biome format --write ./src",
+    "check": "npx @biomejs/biome check --write ./src",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -29,7 +32,8 @@
   },
   "homepage": "https://github.com/todays-mitsui/vercel-analytics-solid#readme",
   "dependencies": {
-    "@vercel/analytics": "^1.4.1"
+    "@vercel/analytics": "^1.4.1",
+    "vite-plugin-solid": "^2.11.1"
   },
   "peerDependencies": {
     "@solidjs/router": "^0.15.1",
