@@ -1,5 +1,5 @@
 {
-  "name": "@todays-mitsui/vercel-analytics-solid",
+  "name": "vercel-analytics-solid",
   "version": "0.1.1",
   "description": "A lightweight SolidStart component that seamlessly integrates Vercel Analytics into your SolidJS applications.",
   "type": "module",

@@ -1,0 +1,9 @@
+{
+  "name": "@todays-mitsui/vercel-analytics-solid",
+  "version": "0.1.1",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/solid.tsx",
+    "./solidstart": "./src/solidstart.tsx"
+  }
+}
