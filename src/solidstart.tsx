@@ -1,37 +1,41 @@
-import { Analytics as AnalyticsScript } from './solid';
-import { useLocation, useParams } from '@solidjs/router';
-import { computeRoute, track } from '@vercel/analytics';
-import type { AnalyticsProps, BeforeSend, BeforeSendEvent } from '@vercel/analytics';
+import { useLocation, useParams } from "@solidjs/router";
+import { computeRoute, track } from "@vercel/analytics";
+import type {
+	AnalyticsProps,
+	BeforeSend,
+	BeforeSendEvent,
+} from "@vercel/analytics";
+import { Analytics as AnalyticsScript } from "./solid";
 
-type Props = Omit<AnalyticsProps, 'route' | 'disableAutoTrack'>;
+type Props = Omit<AnalyticsProps, "route" | "disableAutoTrack">;
 
 export function Analytics(props: Props) {
-  const { route, path } = useRoute();
-  return (
-    <AnalyticsScript
-      path={path}
-      route={route}
-      {...props}
-      framework="solidstart"
-    />
-  );
+	const { route, path } = useRoute();
+	return (
+		<AnalyticsScript
+			path={path}
+			route={route}
+			{...props}
+			framework="solidstart"
+		/>
+	);
 }
 
 export const useRoute = (): {
-  route: string | null;
-  path: string;
+	route: string | null;
+	path: string;
 } => {
-  const params = useParams();
-  const location = useLocation();
+	const params = useParams();
+	const location = useLocation();
 
-  if (!params) {
-    return { route: null, path: location.pathname };
-  }
+	if (!params) {
+		return { route: null, path: location.pathname };
+	}
 
-  return {
-    route: computeRoute(location.pathname, params),
-    path: location.pathname,
-  };
+	return {
+		route: computeRoute(location.pathname, params),
+		path: location.pathname,
+	};
 };
 
 export { track };
