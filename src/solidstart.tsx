@@ -22,7 +22,7 @@ export function Analytics(props: Props): JSX.Element {
 	);
 }
 
-export const useRoute = (): {
+const useRoute = (): {
 	route: string | null;
 	path: string;
 } => {

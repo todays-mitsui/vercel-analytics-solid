@@ -46,7 +46,9 @@
     "url": "git+https://github.com/todays-mitsui/vercel-analytics-solid.git"
   },
   "scripts": {
-    "build": "tsup src/solid.tsx src/solidstart.tsx",
+    "build": "npm run build:js && npm run build:type",
+    "build:js": "tsup --format=esm src/solid.tsx src/solidstart.tsx",
+    "build:type": "npx tsc --declaration --outDir ./dist/ --emitDeclarationOnly ./src/{solid,solidstart}.tsx",
     "check": "npx @biomejs/biome check --write ./src",
     "fmt": "npx @biomejs/biome format --write ./src",
     "test": "vitest run",
