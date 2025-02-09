@@ -15,7 +15,6 @@ describe("<Analytics />", () => {
 
 	beforeEach(() => {
 		window.va = undefined;
-		// reset the internal queue before every test
 		window.vaq = [];
 	});
 

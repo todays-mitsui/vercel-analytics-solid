@@ -5,5 +5,10 @@ export default defineConfig({
   plugins: [solid()],
   test: {
     environment: 'jsdom',
+    server: {
+      deps: {
+        inline: ["@solidjs/testing-library", "@solidjs/router"],
+      },
+    },
   },
 });
