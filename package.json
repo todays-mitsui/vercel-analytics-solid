@@ -16,12 +16,25 @@
     "@testing-library/user-event": "^14.6.1",
     "jsdom": "^26.0.0",
     "tsup": "^8.3.6",
+    "tsup-preset-solid": "^2.2.0",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
   },
   "exports": {
-    ".": "./dist/solid.js",
-    "./solidstart": "./dist/solidstart.js"
+    "./solid": {
+      "solid": "./dist/solid/index.jsx",
+      "import": {
+        "types": "./dist/solid/index.d.ts",
+        "default": "./dist/solid/index.js"
+      }
+    },
+    "./solidstart": {
+      "solid": "./dist/solidstart/index.jsx",
+      "import": {
+        "types": "./dist/solidstart/index.d.ts",
+        "default": "./dist/solidstart/index.js"
+      }
+    }
   },
   "files": [
     "dist"
@@ -36,7 +49,7 @@
     "web-analytics"
   ],
   "license": "MIT",
-  "module": "./dist/solid.js",
+  "module": "./dist/solid/index.js",
   "peerDependencies": {
     "@solidjs/router": "^0.15.1",
     "solid-js": "^1.9.3"
@@ -46,13 +59,24 @@
     "url": "git+https://github.com/todays-mitsui/vercel-analytics-solid.git"
   },
   "scripts": {
-    "build": "npm run build:js && npm run build:type",
-    "build:js": "tsup",
-    "build:type": "npx tsc --declaration --outDir dist --emitDeclarationOnly src/{solid,solidstart}.tsx",
+    "build": "tsup",
     "check": "npx @biomejs/biome check --write src",
     "fmt": "npx @biomejs/biome format --write src",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
-  "type": "module"
+  "type": "module",
+  "main": "./dist/solid/index.js",
+  "types": "./dist/solid/index.d.ts",
+  "browser": {},
+  "typesVersions": {
+    "*": {
+      "solid": [
+        "./dist/solid/index.d.ts"
+      ],
+      "solidstart": [
+        "./dist/solidstart/index.d.ts"
+      ]
+    }
+  }
 }
