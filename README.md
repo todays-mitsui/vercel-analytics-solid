@@ -11,7 +11,7 @@ see: https://vercel.com/docs/analytics/package
 To install the package, run:
 
 ```bash
-npm install todays-mitsui/vercel-analytics-solid
+npm install vercel-analytics-solid
 ```
 
 ## Usage
