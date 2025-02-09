@@ -20,8 +20,8 @@
     "vitest": "^3.0.5"
   },
   "exports": {
-    ".": "./src/solid.tsx",
-    "./solidstart": "./src/solidstart.tsx"
+    ".": "./dist/solid.js",
+    "./solidstart": "./dist/solidstart.js"
   },
   "files": [
     "dist"
@@ -36,7 +36,7 @@
     "web-analytics"
   ],
   "license": "MIT",
-  "module": "./src/solid.tsx",
+  "module": "./dist/solid.js",
   "peerDependencies": {
     "@solidjs/router": "^0.15.1",
     "solid-js": "^1.9.3"
@@ -47,10 +47,10 @@
   },
   "scripts": {
     "build": "npm run build:js && npm run build:type",
-    "build:js": "tsup --format=esm src/solid.tsx src/solidstart.tsx",
-    "build:type": "npx tsc --declaration --outDir ./dist/ --emitDeclarationOnly ./src/{solid,solidstart}.tsx",
-    "check": "npx @biomejs/biome check --write ./src",
-    "fmt": "npx @biomejs/biome format --write ./src",
+    "build:js": "tsup",
+    "build:type": "npx tsc --declaration --outDir dist --emitDeclarationOnly src/{solid,solidstart}.tsx",
+    "check": "npx @biomejs/biome check --write src",
+    "fmt": "npx @biomejs/biome format --write src",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
