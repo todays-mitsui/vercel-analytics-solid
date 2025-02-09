@@ -6,37 +6,40 @@ import type {
 	BeforeSendEvent,
 } from "@vercel/analytics";
 import type { JSX } from "solid-js";
+import { createMemo, Accessor } from "solid-js";
 import { Analytics as AnalyticsScript } from "./solid.jsx";
 
 type Props = Omit<AnalyticsProps, "route" | "disableAutoTrack">;
 
 export function Analytics(props: Props): JSX.Element {
-	const { route, path } = useRoute();
+	const route = useRoute();
 	return (
 		<AnalyticsScript
-			path={path}
-			route={route}
+			path={route().path}
+			route={route().route}
 			{...props}
 			framework="solidstart"
 		/>
 	);
 }
 
-const useRoute = (): {
+const useRoute = (): Accessor<{
 	route: string | null;
 	path: string;
-} => {
-	const params = useParams();
+}> => {
 	const location = useLocation();
+	const params = useParams();
 
-	if (!params) {
-		return { route: null, path: location.pathname };
-	}
+	return createMemo(() => {
+		if (!params) {
+			return { route: null, path: location.pathname };
+		}
 
-	return {
-		route: computeRoute(location.pathname, params),
-		path: location.pathname,
-	};
+		return {
+			route: computeRoute(location.pathname, params),
+			path: location.pathname,
+		};
+	});
 };
 
 export { track };
