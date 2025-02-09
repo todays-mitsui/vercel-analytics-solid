@@ -1,7 +1,7 @@
 import { cleanup, render } from "@solidjs/testing-library";
 import { createSignal } from "solid-js";
 import { afterEach, beforeEach, describe, expect, test } from "vitest";
-import { Analytics, type AnalyticsProps, track } from "./solid";
+import { Analytics, type AnalyticsProps, track } from "./solid.jsx";
 
 describe("<Analytics />", () => {
 	afterEach(() => {
@@ -44,13 +44,13 @@ describe("<Analytics />", () => {
 			});
 
 			test("sets and changes beforeSend", () => {
-				const beforeSend1: Required<AnalyticsProps>["beforeSend"] = (event) =>
-					event;
-				const beforeSend2: Required<AnalyticsProps>["beforeSend"] = (event) =>
-					event;
+				type BeforeSend = Required<AnalyticsProps>["beforeSend"];
+
+				const beforeSend1: BeforeSend = (event) => event;
+				const beforeSend2: BeforeSend = (event) => event;
 
 				const [beforeSend, setBeforeSend] =
-					createSignal<Required<AnalyticsProps>["beforeSend"]>(beforeSend1);
+					createSignal<BeforeSend>(beforeSend1);
 
 				render(() => <Analytics beforeSend={beforeSend()} mode="production" />);
 
@@ -67,11 +67,13 @@ describe("<Analytics />", () => {
 			});
 
 			test("does not change beforeSend when undefined", () => {
-				const beforeSend1: Required<AnalyticsProps>["beforeSend"] = (event) =>
-					event;
+				type BeforeSend = Required<AnalyticsProps>["beforeSend"];
 
-				const [beforeSend, setBeforeSend] =
-					createSignal<Required<AnalyticsProps>["beforeSend"]>(beforeSend1);
+				const beforeSend1: BeforeSend = (event) => event;
+
+				const [beforeSend, setBeforeSend] = createSignal<
+					BeforeSend | undefined
+				>(beforeSend1);
 
 				render(() => <Analytics beforeSend={beforeSend()} mode="production" />);
 
@@ -112,10 +114,13 @@ describe("<Analytics />", () => {
 				render(() => <Analytics mode="production" />);
 				const name = "custom event";
 				const data = { string: "string", number: 1 };
-				type Params = Parameters<typeof track>;
+				type NonUndefined<T> = T extends undefined ? never : T;
+				type AllowedPropertyValues = NonUndefined<
+					Parameters<typeof track>[1]
+				>[string];
 				track(name, {
 					...data,
-					nested: { object: "" } as unknown as Params[1][string],
+					nested: { object: "" } as unknown as AllowedPropertyValues,
 				});
 
 				expect(window.vaq?.[0]).toEqual(["event", { name, data }]);
